@@ -184,13 +184,13 @@ void print_fun(char *name, uint32_t value)
 	printf("\n");
 }
 
-void print_usage(void)
+void print_usage(const char *prog)
 {
-	printf("cvi_pinmux for cv181x\n");
-	printf("./cvi_pinmux -p          <== List all pins\n");
-	printf("./cvi_pinmux -l          <== List all pins and its func\n");
-	printf("./cvi_pinmux -r pin      <== Get func from pin\n");
-	printf("./cvi_pinmux -w pin/func <== Set func to pin\n");
+	printf("pinmux for sg200x\n");
+	printf("%s -p          <== List all pins\n", prog);
+	printf("%s -l          <== List all pins and its func\n", prog);
+	printf("%s -r pin      <== Get func from pin\n", prog);
+	printf("%s -w pin/func <== Set func to pin\n", prog);
 }
 
 int main(int argc, char *argv[])
@@ -203,7 +203,7 @@ int main(int argc, char *argv[])
 	uint32_t f_val;
 
 	if (argc == 1) {
-		print_usage();
+		print_usage(argv[0]);
 		return 1;
 	}
 
@@ -229,7 +229,7 @@ int main(int argc, char *argv[])
 		case 'w':
 			// printf("optarg %s\n", optarg);
 			if (sscanf(optarg, "%[^/]/%s", pin, func) != 2)
-				print_usage();
+				print_usage(argv[0]);
 
 			printf("pin %s\n", pin);
 			printf("func %s\n", func);
@@ -268,15 +268,15 @@ int main(int argc, char *argv[])
 			break;
 
 		case 'h':
-			print_usage();
+			print_usage(argv[0]);
 			break;
 
 		case '?':
-			print_usage();
+			print_usage(argv[0]);
 			break;
 
 		default:
-			print_usage();
+			print_usage(argv[0]);
 			break;
 		}
 	}
